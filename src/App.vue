@@ -1,29 +1,42 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-    <p>Access: {{ accessToken }}</p>
+  <div id="nav" class="py-16 text-white bg-primary">
+    <load-layout v-if="isLoading">
+      <base-loading />
+    </load-layout>
+
+    <main-layout v-else />
   </div>
-  <router-view />
 </template>
 
 <script>
 import { ref, provide } from 'vue';
 import { getToken } from './api/oauth';
 
+import BaseLoading from './components/BaseLoading';
+import MainLayout from './components/MainLayout';
+import LoadLayout from './components/LoadLayout';
+
 export default {
+  components: {
+    MainLayout,
+    LoadLayout,
+    BaseLoading
+  },
+
   setup() {
     const accessToken = ref(null);
+    const isLoading = ref(true);
 
     getToken()
       .then(({ data }) => (accessToken.value = data.access_token))
       .catch(err => console.log('Error OAuth:', err))
-      .finally(() => console.log('Done'));
+      .finally(() => (isLoading.value = false));
 
     provide('accessToken', accessToken);
 
     return {
-      accessToken
+      accessToken,
+      isLoading
     };
   }
 };
@@ -31,23 +44,6 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  font-family: 'Avenir', Arial, Helvetica, sans-serif;
 }
 </style>
