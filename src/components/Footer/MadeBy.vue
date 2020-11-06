@@ -17,4 +17,8 @@ export default {
 a {
   @apply text-blue-600;
 }
+
+a:hover {
+  text-decoration: underline;
+}
 </style>
