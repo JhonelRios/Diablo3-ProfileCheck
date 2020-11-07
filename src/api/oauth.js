@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { post } from 'axios';
 
 const clientId = 'bcd316e856594d19963ac42175e5e8f5';
 const clientSecret = 'ENtNj3RDoCD6sScX96uR9EyRzbJgdiHf';
@@ -16,7 +16,7 @@ function getToken() {
     auth: { username: clientId, password: clientSecret }
   };
 
-  return axios.post(API_URL, body, config);
+  return post(API_URL, body, config);
 }
 
 export { getToken };

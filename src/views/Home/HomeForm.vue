@@ -47,6 +47,8 @@
 
 <script>
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+
 import { regions } from '../../utils/regions';
 
 export default {
@@ -62,9 +64,14 @@ export default {
       regions.map(region => ({ name: region, text: region.toUpperCase() }))
     );
 
+    const router = useRouter();
+
     const onSubmit = () => {
       const { battleTag, region } = form.value;
-      console.log(battleTag, region);
+      router.push({
+        name: 'Profile',
+        params: { region, battleTag: battleTag.replace('#', '-') }
+      });
     };
 
     return {
