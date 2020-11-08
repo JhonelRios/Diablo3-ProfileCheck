@@ -1,7 +1,9 @@
 <template>
   <div>
     <base-loading v-if="isLoading" />
-    <h1>Profile View</h1>
+    <template v-if="profileData !== null">
+      <main-block :profile-data="profileData" />
+    </template>
   </div>
 </template>
 
@@ -10,13 +12,15 @@ import { ref, inject } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import BaseLoading from '../../components/BaseLoading';
+import MainBlock from './MainBlock/Index';
 import { getApiAccount } from '../../api/search';
 import { useError } from '../../composables/useError';
 
 export default {
   name: 'Profile',
   components: {
-    BaseLoading
+    BaseLoading,
+    MainBlock
   },
 
   setup(props, { emit }) {
