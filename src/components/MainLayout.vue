@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto text-center">
+  <div class="container mx-auto px-4">
     <header-bar />
 
     <router-view @set-error="setError" :error="error" />
