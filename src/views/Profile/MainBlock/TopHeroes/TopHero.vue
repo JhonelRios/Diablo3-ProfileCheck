@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-5">
+  <div class="mb-0 sm:mb-5">
     <div class="bg-gray-700 flex justify-center p-4 sm:p-0">
       <div :class="heroClass"></div>
     </div>
