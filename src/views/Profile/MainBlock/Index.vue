@@ -4,6 +4,8 @@
       <top-heroes v-if="hasHeroes" :heroes="topHeroes" />
 
       <heroes-list v-if="hasHeroesList" :heroes="heroesList" />
+
+      <progress-list :acts="profileData.progression" />
     </div>
 
     <div class="col-span-1 lg:col-span-2">
@@ -17,12 +19,14 @@ import { computed } from 'vue';
 
 import TopHeroes from './TopHeroes/Index';
 import HeroesList from './HeroesList/Index';
+import ProgressList from './ProgressList/Index';
 
 export default {
   name: 'MainBlock',
   components: {
     TopHeroes,
-    HeroesList
+    HeroesList,
+    ProgressList
   },
   props: {
     profileData: {

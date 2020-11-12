@@ -1,3 +1,5 @@
+/* Diablo Font */
+
 @font-face {
   font-family: 'DiabloHeavy';
   src: url('../fonts/diabloh.eot');
@@ -14,6 +16,8 @@
 .font-diablo {
   font-family: 'DiabloHeavy', sans-serif;
 }
+
+/* Hero Icons */
 
 .hero-barbarian,
 .hero-witch-doctor,
@@ -132,4 +136,46 @@
   .hero-crusader {
     height: 196px;
   }
+}
+
+/* Acts */
+
+.act {
+  background-image: url('../img/progress.png');
+  background-size: 500%;
+}
+
+.act.act1.pending {
+  background-position: -1px 0;
+}
+.act.act1.done {
+  background-position: -1px 57px;
+}
+
+.act.act2.pending {
+  background-position: -51px 0;
+}
+.act.act2.done {
+  background-position: -51px -56px;
+}
+
+.act.act3.pending {
+  background-position: -101px 0px;
+}
+.act.act3.done {
+  background-position: -101px -168px;
+}
+
+.act.act4.pending {
+  background-position: -151px 0px;
+}
+.act.act4.done {
+  background-position: -151px -168px;
+}
+
+.act.act5.pending {
+  background-position: 50px 0;
+}
+.act.act5.done {
+  background-position: 50px 57px;
 }
