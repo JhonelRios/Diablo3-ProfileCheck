@@ -8,8 +8,8 @@
       <progress-list :acts="profileData.progression" />
     </div>
 
-    <div class="col-span-1 lg:col-span-2">
-      <h1>Derecha</h1>
+    <div class="col-span-1 lg:col-span-2 lg:ml-6">
+      <player-stats :stats="statsData" />
     </div>
   </div>
 </template>
@@ -20,13 +20,15 @@ import { computed } from 'vue';
 import TopHeroes from './TopHeroes/Index';
 import HeroesList from './HeroesList/Index';
 import ProgressList from './ProgressList/Index';
+import PlayerStats from './PlayerStats/Index';
 
 export default {
   name: 'MainBlock',
   components: {
     TopHeroes,
     HeroesList,
-    ProgressList
+    ProgressList,
+    PlayerStats
   },
   props: {
     profileData: {
@@ -44,11 +46,17 @@ export default {
       props.profileData.heroes.slice(3, props.profileData.heroes.length)
     );
 
+    const statsData = computed(() => {
+      const { paragonLevel, kills, timePlayed } = props.profileData;
+      return { paragonLevel, kills, timePlayed };
+    });
+
     return {
       hasHeroes,
       topHeroes,
       hasHeroesList,
-      heroesList
+      heroesList,
+      statsData
     };
   }
 };
