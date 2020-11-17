@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hr class="bg-white mt-3 sm:hidden sm:mt-0" />
+    <hr class="border-gray-600 mt-3 sm:hidden sm:mt-0" />
     <h2 class="font-diablo my-4 text-2xl">Stats</h2>
     <div class="flex flex-col bg-gray-800 p-4">
       <single-stat
@@ -24,12 +24,13 @@
       />
     </div>
 
-    <time-played />
+    <time-played :time-played="timePlayed" />
   </div>
 </template>
 
 <script>
-// import { useHeroName } from '@/composables/useHeroName';
+import { computed } from 'vue';
+import { useHeroName } from '@/composables/useHeroName';
 
 import SingleStat from './SingleStat';
 import TimePlayed from './TimePlayed';
@@ -47,8 +48,22 @@ export default {
     }
   },
 
-  setup() {
-    return {};
+  setup(props) {
+    const timePlayed = computed(() =>
+      Object.keys(props.stats.timePlayed)
+        .sort()
+        .map(hero => {
+          return {
+            hero: useHeroName(hero),
+            time: props.stats.timePlayed[hero],
+            classSlug: hero
+          };
+        })
+    );
+
+    return {
+      timePlayed
+    };
   }
 };
 </script>
