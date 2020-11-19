@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center cursor-pointer" @click="goToHero(hero.id)">
     <span class="hero-image" :class="heroClassImg" />
     <span class="hero-name ml-2" :class="{ 'text-red-600': hero.hardcore }">
       {{ hero.name }}
@@ -16,7 +16,9 @@
 </template>
 
 <script>
+import { useRoute, useRouter } from 'vue-router';
 import { computed } from 'vue';
+
 export default {
   name: 'HeroIco',
   props: {
@@ -27,6 +29,9 @@ export default {
   },
 
   setup(props) {
+    const route = useRoute();
+    const router = useRouter();
+
     const heroClassImg = computed(() => {
       const gender = props.hero.gender === 1 ? 'female' : 'male';
       const hardcore = props.hero.hardcore ? 'border border-red-600' : '';
@@ -34,8 +39,15 @@ export default {
       return `hero-${props.hero.classSlug} ${gender} ${hardcore}`;
     });
 
+    const goToHero = heroId => {
+      const { region, battleTag } = route.params;
+
+      router.push({ name: 'Hero', params: { region, battleTag, heroId } });
+    };
+
     return {
-      heroClassImg
+      heroClassImg,
+      goToHero
     };
   }
 };

@@ -3,24 +3,28 @@
     <base-loading v-if="isLoading" />
     <template v-if="profileData !== null">
       <main-block :profile-data="profileData" />
+      <artisans-block :artisans-data="artisansData" />
     </template>
   </div>
 </template>
 
 <script>
-import { ref, inject } from 'vue';
+import { ref, inject, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+
+import { getApiAccount } from '../../api/search';
+import { useError } from '../../composables/useError';
 
 import BaseLoading from '../../components/BaseLoading';
 import MainBlock from './MainBlock/Index';
-import { getApiAccount } from '../../api/search';
-import { useError } from '../../composables/useError';
+import ArtisansBlock from './ArtisansBlock/Index';
 
 export default {
   name: 'Profile',
   components: {
     BaseLoading,
-    MainBlock
+    MainBlock,
+    ArtisansBlock
   },
 
   setup(props, { emit }) {
@@ -43,9 +47,19 @@ export default {
       })
       .finally(() => (isLoading.value = false));
 
+    const artisansData = computed(() => ({
+      blacksmith: profileData.value.blacksmith,
+      blacksmithHardcore: profileData.value.blacksmithHardcore,
+      jeweler: profileData.value.jeweler,
+      jewelerHardcore: profileData.value.jewelerHardcore,
+      mystic: profileData.value.mystic,
+      mysticHardcore: profileData.value.mysticHardcore
+    }));
+
     return {
       isLoading,
-      profileData
+      profileData,
+      artisansData
     };
   }
 };

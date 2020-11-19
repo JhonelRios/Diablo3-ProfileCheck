@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-0 sm:mb-5">
+  <div class="mb-0 sm:mb-5 cursor-pointer" @click="goToHero(hero.id)">
     <div class="bg-gray-700 flex justify-center p-4 sm:p-0">
       <div :class="heroClass"></div>
     </div>
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { useRoute, useRouter } from 'vue-router';
 import { computed } from 'vue';
 
 export default {
@@ -44,16 +45,24 @@ export default {
   },
 
   setup(props) {
+    const route = useRoute();
+    const router = useRouter();
+
     const heroClass = computed(() => {
       const gender = props.hero.gender === 0 ? 'male' : 'female';
 
       return `hero-${props.hero.classSlug} ${gender}`;
     });
 
-    console.log(heroClass.value);
+    const goToHero = heroId => {
+      const { region, battleTag } = route.params;
+
+      router.push({ name: 'Hero', params: { region, battleTag, heroId } });
+    };
 
     return {
-      heroClass
+      heroClass,
+      goToHero
     };
   }
 };

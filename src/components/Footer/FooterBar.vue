@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="mt-8">
     <powered-by :icons="icons" />
 
     <hr class="border-primary my-12" />
