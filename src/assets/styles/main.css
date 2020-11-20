@@ -19,6 +19,8 @@
 
 /* Hero Icons */
 
+/* purgecss start ignore */
+
 .hero-barbarian,
 .hero-witch-doctor,
 .hero-demon-hunter,
@@ -137,6 +139,8 @@
     height: 196px;
   }
 }
+
+/* purgecss end ignore */
 
 /* Acts */
 
