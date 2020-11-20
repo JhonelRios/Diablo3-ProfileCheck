@@ -9,7 +9,7 @@
             width="30"
             class="inline"
           />
-          <span class="font-diablo ml-3 text-xl">D3PF</span>
+          <span class="font-diablo ml-3 text-xl">{{ title }}</span>
         </router-link>
       </div>
     </nav>
@@ -18,6 +18,13 @@
 
 <script>
 export default {
-  name: 'HeaderBar'
+  name: 'HeaderBar',
+  setup() {
+    const title = process.env.VUE_APP_TITLE;
+
+    return {
+      title
+    };
+  }
 };
 </script>

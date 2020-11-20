@@ -1,7 +1,7 @@
 import { post } from 'axios';
 
-const clientId = 'bcd316e856594d19963ac42175e5e8f5';
-const clientSecret = 'ENtNj3RDoCD6sScX96uR9EyRzbJgdiHf';
+const clientId = process.env.VUE_APP_CLIENT_ID;
+const clientSecret = process.env.VUE_APP_CLIENT_SECRET;
 
 const region = 'us';
 const API_URL = `https://${region}.battle.net/oauth/token`;
